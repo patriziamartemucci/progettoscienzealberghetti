@@ -24,7 +24,7 @@ class PictureTransferHandler extends TransferHandler {
     if (canImport(c, t.getTransferDataFlavors())) {
       DTPicture pic = (DTPicture) c;
       //Don't drop on myself.
-      if (sourcePic == pic) {
+      if (sourcePic == pic || pic.image!=null) {
         shouldRemove = false;
         return true;
       }

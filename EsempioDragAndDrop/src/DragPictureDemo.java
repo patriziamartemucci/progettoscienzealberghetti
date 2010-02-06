@@ -44,16 +44,37 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class DragPictureDemo extends JPanel {
+public class DragPictureDemo extends JPanel implements ActionListener {
 
-  DTPicture pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10,
-      pic11, pic12;
+  private static final Icon Icon = null;
 
+DTPicture pic1, pic2, pic3, pic4, pic5, pic6;
+
+ DTPicture pic7;
+
+ DTPicture pic8;
+
+ DTPicture pic9;
+
+ DTPicture pic10;
+
+ DTPicture pic11;
+
+ DTPicture pic12;
+  
+  static JButton verifica = new JButton ("Verifica");
+  
   static String denari1 = "Denari1";
 
   static String denari2 = "Denari2";
@@ -66,36 +87,66 @@ public class DragPictureDemo extends JPanel {
   
   static String denari6 = "Denari6";
  
+   DTPicture vett[];
+  static String immagini[];
 
   PictureTransferHandler picHandler;
 
   public DragPictureDemo() {
     super(new BorderLayout());
     picHandler = new PictureTransferHandler();
-
+    immagini=new String [6];
+    immagini[0]=denari1;
+    immagini[1]=denari2;
+    immagini[2]=denari3;
+    immagini[3]=denari4;
+    immagini[4]=denari5;
+    immagini[5]=denari6;
+    
+    int v[]=new int[6];
+    for(int i=0;i<6;i++)
+    	v[i]=i;
+    disordina_immagini(v);
+    
     JPanel mugshots = new JPanel(new GridLayout(4, 3));
-   
-    pic1 = new DTPicture(createImageIcon(denari1 + ".jpg",denari1).getImage());
+    JPanel button=new JPanel(new GridLayout(1,2));
+    verifica.addActionListener(this);
+    button.add(verifica);
+    
+    vett=new DTPicture[6];
+    //inizializzo vettore
+    vett[0]=new DTPicture(createImageIcon(immagini[0] + ".jpg",immagini[0]).getImage());
+    vett[1]=new DTPicture(createImageIcon(immagini[1] + ".jpg",immagini[1]).getImage());
+    vett[2]=new DTPicture(createImageIcon(immagini[2] + ".jpg",immagini[2]).getImage());
+    vett[3]=new DTPicture(createImageIcon(immagini[3] + ".jpg",immagini[3]).getImage());
+    vett[4]=new DTPicture(createImageIcon(immagini[4] + ".jpg",immagini[4]).getImage());
+    vett[5]=new DTPicture(createImageIcon(immagini[5] + ".jpg",immagini[5]).getImage());
+   //Assegna immagini a contenitori in alto
+    
+    pic1 = new DTPicture(createImageIcon(immagini[v[0]] + ".jpg",immagini[v[0]]).getImage());
     pic1.setTransferHandler(picHandler);
     mugshots.add(pic1);
-    pic2 = new DTPicture(createImageIcon(denari2 + ".jpg",denari2).getImage());
+    pic2 = new DTPicture(createImageIcon(immagini[v[1]] + ".jpg",immagini[v[1]]).getImage());
     pic2.setTransferHandler(picHandler);
     mugshots.add(pic2);
-    pic3 = new DTPicture(createImageIcon(denari3 + ".jpg",denari3).getImage());
+    pic3 = new DTPicture(createImageIcon(immagini[v[2]] + ".jpg",immagini[v[2]]).getImage());
     pic3.setTransferHandler(picHandler);
     mugshots.add(pic3);
-    pic4 = new DTPicture(createImageIcon(denari4 + ".jpg",denari4).getImage());
+    pic4 = new DTPicture(createImageIcon(immagini[v[3]] + ".jpg",immagini[v[3]]).getImage());
     pic4.setTransferHandler(picHandler);
     mugshots.add(pic4);
-    pic5 = new DTPicture(createImageIcon(denari5 + ".jpg",denari5).getImage());
+    pic5 = new DTPicture(createImageIcon(immagini[v[4]] + ".jpg",immagini[v[4]]).getImage());
     pic5.setTransferHandler(picHandler);
     mugshots.add(pic5);
-    pic6 = new DTPicture(createImageIcon(denari6 + ".jpg",denari6).getImage());
+    pic6 = new DTPicture(createImageIcon(immagini[v[5]] + ".jpg",immagini[v[5]]).getImage());
     pic6.setTransferHandler(picHandler);
     mugshots.add(pic6);
-
+    
+    
+    
     //These six components with no pictures provide handy
     //drop targets.
+    
     pic7 = new DTPicture(null);
     pic7.setTransferHandler(picHandler);
     mugshots.add(pic7);
@@ -118,6 +169,8 @@ public class DragPictureDemo extends JPanel {
     setPreferredSize(new Dimension(450, 630));
     add(mugshots, BorderLayout.CENTER);
     setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    add(button, BorderLayout.PAGE_END);
+    
   }
 
   /** Returns an ImageIcon, or null if the path was invalid. */
@@ -148,7 +201,7 @@ public class DragPictureDemo extends JPanel {
     DragPictureDemo demo = new DragPictureDemo();
     demo.setOpaque(true); //content panes must be opaque
     frame.setContentPane(demo);
-
+    
     //Display the window.
     frame.pack();
     frame.setVisible(true);
@@ -163,7 +216,86 @@ public class DragPictureDemo extends JPanel {
       }
     });
   }
+
+  public void actionPerformed(ActionEvent arg0) {// dove fare esecuzione
+	// TODO Auto-generated method stub
+	  //Controllo sistematico di tutte le immagini
+	  //restituisce un MsgBox con scritto l'esito dell'ordinamento
+		if(pic7.equals(vett[0])){
+			if(pic8.equals(vett[1])){
+				if(pic9.equals(vett[2])){
+					if(pic10.equals(vett[3])){
+						if(pic11.equals(vett[4])){
+							if(pic12.equals(vett[5])){
+								JOptionPane.showMessageDialog(this,
+										  "Ordinamento Corretto",
+										  "VERIFICA ORDINAMENTO",
+										  JOptionPane.INFORMATION_MESSAGE,
+										  Icon);
+								//System.exit(1);
+							}else{
+								JOptionPane.showMessageDialog(this,
+										  "Ordinamento Errato",
+										  "VERIFICA ORDINAMENTO",
+										  JOptionPane.INFORMATION_MESSAGE,
+										  Icon);
+							}
+						}else{
+							JOptionPane.showMessageDialog(this,
+									  "Ordinamento Errato",
+									  "VERIFICA ORDINAMENTO",
+									  JOptionPane.INFORMATION_MESSAGE,
+									  Icon);
+						}
+					}else{
+						JOptionPane.showMessageDialog(this,
+								  "Ordinamento Errato",
+								  "VERIFICA ORDINAMENTO",
+								  JOptionPane.INFORMATION_MESSAGE,
+								  Icon);
+					}
+				}else{
+					JOptionPane.showMessageDialog(this,
+							  "Ordinamento Errato",
+							  "VERIFICA ORDINAMENTO",
+							  JOptionPane.INFORMATION_MESSAGE,
+							  Icon);
+				}
+			}else{
+				JOptionPane.showMessageDialog(this,
+						  "Ordinamento Errato",
+						  "VERIFICA ORDINAMENTO",
+						  JOptionPane.INFORMATION_MESSAGE,
+						  Icon);
+			}
+		}else{
+			JOptionPane.showMessageDialog(this,
+					  "Ordinamento Errato",
+					  "VERIFICA ORDINAMENTO",
+					  JOptionPane.INFORMATION_MESSAGE,
+					  Icon);
+		}
+			
+	  
+  }
+  public static void disordina_immagini(int imma[]){
+	  int num=0;
+	  int images[]=imma.clone();
+	  boolean v[]=new boolean [6];
+	  for(int i=0;i<6;i++)
+		  v[i]=false;
+	  for(int i=0;i<6;i++){
+		  do{
+			 num=(int)(Math.random()*6); 
+		  }while(v[num]);
+		  v[num]=true;
+		  imma[i]=images[num];
+		  //System.out.println("immagini["+i+"] = "+num);
+	  }
+  }  
 }
+  
+  
 
 
   

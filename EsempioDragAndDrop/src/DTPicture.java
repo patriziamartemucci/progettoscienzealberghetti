@@ -34,7 +34,7 @@ class DTPicture extends Picture implements MouseMotionListener {
     //menu accelerators and so calls setInstallInputMapBindings
     //with a value of false. Your program would do one or the
     //other, but not both.
-    if (installInputMapBindings) {
+    /*if (installInputMapBindings) {
       InputMap imap = this.getInputMap();
       imap.put(KeyStroke.getKeyStroke("ctrl X"), TransferHandler
           .getCutAction().getValue(Action.NAME));
@@ -43,6 +43,7 @@ class DTPicture extends Picture implements MouseMotionListener {
       imap.put(KeyStroke.getKeyStroke("ctrl V"), TransferHandler
           .getPasteAction().getValue(Action.NAME));
     }
+    */
 
     //Add the cut/copy/paste actions to the action map.
     //This step is necessary because the menu's action listener
@@ -119,7 +120,13 @@ class DTPicture extends Picture implements MouseMotionListener {
   public static boolean getInstallInputMapBindingds() { //for completeness
     return installInputMapBindings;
   }
-
+  public boolean equals(Object o) {
+	  if (o != null && getClass().equals(o.getClass())) {
+	  DTPicture b = (DTPicture)o;
+	  return (b.image == image);
+	  }
+	  else return false;
+	  }
 
 }
 
