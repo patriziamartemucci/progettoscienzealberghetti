@@ -17,7 +17,7 @@ import javax.swing.JComponent;
 class Picture extends JComponent implements MouseListener, FocusListener,
     Accessible {
   Image image;
-
+  //
   public Picture(Image image) {
 
     this.image = image;

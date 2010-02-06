@@ -6,7 +6,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 class PictureTransferable implements Transferable {
     private Image image;
     DataFlavor pictureFlavor;
-
+    //
     PictureTransferable(DTPicture pic) {
       image = pic.image;
     }
