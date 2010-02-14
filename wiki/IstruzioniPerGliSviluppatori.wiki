@@ -33,7 +33,7 @@ Selezionare la cartella sul repository. Si apre il  Wizard per creare il progett
 A questo punto si apre la finestra del wizard per la creazione di 
 un nuovo progetto Java. Proseguire normalmente.
 
-<li> per scaricare l'ultima versione di un progetto (o di una singola classe), fate l'update (upload sul disco locale): in Package Explorer col tasto destro sul nome del progetto <br>
+<li> per scaricare l'ultima versione di un progetto (o di una singola classe), fate l'update: in Package Explorer col tasto destro sul nome del progetto <br>
 team->update.
 
 <li> per fare il commit (pubblicare una nuova versione dell'applicazione):in Package Explorer col tasto destro sul nome del progetto (o della singola classe)<br>
