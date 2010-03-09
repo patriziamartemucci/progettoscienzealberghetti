@@ -21,6 +21,7 @@ class Picture extends JComponent implements MouseListener, FocusListener,
   public Picture(Image image) {
 
     this.image = image;
+    //this.setSize(96, 128);
     setFocusable(true);
     addMouseListener(this);
     addFocusListener(this);
@@ -60,8 +61,8 @@ class Picture extends JComponent implements MouseListener, FocusListener,
 
     //Draw in our entire space, even if isOpaque is false.
     g.setColor(Color.WHITE);
-    g.fillRect(0, 0, image == null ? 125 : image.getWidth(this),
-        image == null ? 125 : image.getHeight(this));
+    g.fillRect(0, 0, image == null ? 96 : image.getWidth(this),
+        image == null ? 128 : image.getHeight(this));
 
     if (image != null) {
       //Draw image at its natural size of 125x125.

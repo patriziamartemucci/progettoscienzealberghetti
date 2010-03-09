@@ -98,7 +98,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   public DragPictureDemo() {
 	  
     //super(new GridLayout(5,1));
-    super(new GridBagLayout());
+    //super(new GridBagLayout());
+	setLayout(new GridLayout(5,1,0,0));
     
     //System.out.println("Costruttore di DragPictureDemo");
     
@@ -110,7 +111,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
     JPanel MovePanel  = new JPanel(new GridLayout( 1, 3));
     JPanel WhatPanel  = new JPanel(new GridLayout( 1, 5));
-    JPanel TablePanel = new JPanel(new GridLayout( 5, 2));
+    JPanel TablePanel = new JPanel(new GridLayout( 2, 5));
     
     //Attribuzione dei nomi delle immagini di chi muove.
     
@@ -238,10 +239,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	
     //Bottone per la verifica.
     
-    //JPanel pannelloBottone=new JPanel();
+    JPanel pannelloBottone=new JPanel();
     JButton verifica=new JButton("Verifica");
     verifica.addActionListener(this);
-    //pannelloBottone.add(verifica);
+    pannelloBottone.add(verifica);
     
     //Dimensioni Finestra intera.
     //setPreferredSize(new Dimension(1000, 600));
@@ -249,8 +250,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //add(mugshots, BorderLayout.CENTER);
     //add(pannelloBottone,BorderLayout.AFTER_LAST_LINE);
     
-    c.gridheight = 1;
-	c.gridwidth = 1;
+    //c.gridheight = 1;
+	//c.gridwidth = 1;
 
     //add(MovePanel, 1, 1);
     //add(WhatPanel,2,2);
@@ -261,7 +262,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     add(WhatPanel);
     add(TablePanel);
     add(trash);
-    add(verifica);
+    //add(verifica);
+    add(pannelloBottone);
     
     //setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
   }
@@ -297,6 +299,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 
     //Create and set up the window.
     JFrame frame = new JFrame("Gioco delle carte di chi muove cosa.");
+    frame.setLayout(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     //Create and set up the menu bar and content pane.

@@ -25,6 +25,7 @@ class DTPicture extends Picture implements MouseMotionListener {
 
   public DTPicture(Image image, boolean trasferibile) {
     super(image);
+    //this.setSize(96, 128);
     System.out.println("Classe DTPicture. Costruttore -- image: "+image);
     addMouseMotionListener(this);
     System.out.println("Classe DTPicture. Metodo Costruttore ");
