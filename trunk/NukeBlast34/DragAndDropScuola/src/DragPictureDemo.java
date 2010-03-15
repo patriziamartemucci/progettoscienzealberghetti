@@ -101,7 +101,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	  
     //super(new GridLayout(5,1));
     //super(new GridBagLayout());
-	setLayout(new GridLayout(5,1,0,0));
+	//setLayout(new GridLayout(5,1,0,0));
 	setLayout(null);
 	
     //System.out.println("Costruttore di DragPictureDemo");
@@ -112,9 +112,11 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
     //Pannelli per scegliere chi muove, cosa e dove disporre le carte.
     
-    JPanel MovePanel  = new JPanel(new GridLayout( 1, 3));
-    JPanel WhatPanel  = new JPanel(new GridLayout( 1, 5));
-    JPanel TablePanel = new JPanel(new GridLayout( 2, 5));
+    JPanel MovePanel  = new JPanel(new GridLayout( 1, 3, 0, 0));
+    JPanel WhatPanel  = new JPanel(new GridLayout( 1, 5, 0, 0));
+    JPanel TablePanel = new JPanel(new GridLayout( 2, 5, 0, 0));
+    JPanel TrashPanel = new JPanel(new GridLayout( 1, 1, 0, 0));
+    JPanel VerifyPanel = new JPanel();
     
     //Attribuzione dei nomi delle immagini di chi muove.
     
@@ -235,17 +237,14 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     TablePanel.add(what5);
     
     trash = new DTPicture(createImageIcon("trash.jpg", "trash").getImage(),false);
-    trash.setTransferHandler(picHandler3);    
-    //mugshots.add(trash);
-    //c.gridheight = 1;
-    //c.gridwidth  = 1;
-	
+    trash.setTransferHandler(picHandler3); 
+    TrashPanel.add(trash);
+    
     //Bottone per la verifica.
     
-    JPanel pannelloBottone=new JPanel();
-    JButton verifica=new JButton("Verifica");
+    JButton verifica = new JButton("Verifica");
     verifica.addActionListener(this);
-    pannelloBottone.add(verifica);
+    VerifyPanel.add(verifica);
     
     //Dimensioni Finestra intera.
     //setPreferredSize(new Dimension(1000, 600));
@@ -261,14 +260,21 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //add(TablePanel,3,3);
     //add(trash,4,4);
     //add(verifica,5,5);
-    MovePanel.setSize( 300 , 300);
-    //MovePanel.setLocation(globalwidth, 100);
+    
+    MovePanel.setSize( globalwidth , 140);
     add(MovePanel);
+    WhatPanel.setSize( globalwidth , 140);
+    WhatPanel.setLocation( 0 , 180 );
     add(WhatPanel);
+    TablePanel.setSize( globalwidth , 280 );
+    TablePanel.setLocation( 0 , 360 );
     add(TablePanel);
-    add(trash);
-    //add(verifica);
-    add(pannelloBottone);
+    TrashPanel.setSize( globalwidth , 140 );
+    TrashPanel.setLocation( 0 , 600 );
+    add(TrashPanel);
+    VerifyPanel.setSize( globalwidth , 50 );
+    VerifyPanel.setLocation( 0 , 760 );
+    add(VerifyPanel);
     
     //setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
   }
@@ -314,15 +320,14 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
 
     //Display the window.
-    frame.pack();
-    frame.setSize(1000,1000);
+    //frame.pack();
+    frame.setSize( globalwidth , globalheight );
     frame.setVisible(true);
     frame.addComponentListener(new ComponentAdapter() {				//Qui aggiungo il listener
     	  public void componentResized(ComponentEvent event) {		//per controllare il ridimensionamento.
-    		  globalwidth = frame.getSize().width;
-    		  globalheight = frame.getSize().height;
+    		  globalwidth = (int)frame.getSize().getWidth();
+    		  globalheight = (int)frame.getSize().getHeight();
     		  System.out.println(globalwidth + " x " + globalheight);
-    		  //frame.repaint();
     	  }
     });
   }
@@ -379,6 +384,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   public static void main(String[] args) {
     //Schedule a job for the event-dispatching thread:
     //creating and showing this application's GUI.
+	
+	globalwidth = 800;
+	globalheight = 600;
+	
     javax.swing.SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         createAndShowGUI();
