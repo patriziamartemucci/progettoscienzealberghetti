@@ -65,6 +65,8 @@ import javax.swing.JPanel;
 
 public class DragPictureDemo extends JPanel implements ActionListener{
 
+  static int globalwidth = 0 , globalheight = 0;	//Variabili globali per condividere fra i componenti le dimensioni del frame.
+	
   DTPicture moveA, moveB, moveC, whatA, whatB, whatC, whatD, whatE, move1, move2,
             move3, move4, move5, what1, what2, what3, what4, what5, trash;
 
@@ -100,7 +102,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //super(new GridLayout(5,1));
     //super(new GridBagLayout());
 	setLayout(new GridLayout(5,1,0,0));
-    
+	setLayout(null);
+	
     //System.out.println("Costruttore di DragPictureDemo");
     
     picHandler = new PictureTransferHandler(-1);
@@ -258,6 +261,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //add(TablePanel,3,3);
     //add(trash,4,4);
     //add(verifica,5,5);
+    MovePanel.setSize( 300 , 300);
+    //MovePanel.setLocation(globalwidth, 100);
     add(MovePanel);
     add(WhatPanel);
     add(TablePanel);
@@ -298,20 +303,28 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	//JFrame.setDefaultLookAndFeelDecorated(true);
 
     //Create and set up the window.
-    JFrame frame = new JFrame("Gioco delle carte di chi muove cosa.");
+    final JFrame frame = new JFrame("Gioco delle carte di chi muove cosa."); //Dichiarata final perchè se no il listener rompe.
     frame.setLayout(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     //Create and set up the menu bar and content pane.
-    DragPictureDemo demo = new DragPictureDemo();
-    demo.setOpaque(true); //content panes must be opaque
-    frame.setContentPane(demo);
+    DragPictureDemo mainpanel = new DragPictureDemo();
+    mainpanel.setOpaque(true); //content panes must be opaque
+    frame.setContentPane(mainpanel);
     
 
     //Display the window.
     frame.pack();
-    //frame.setSize(1000,1000);
+    frame.setSize(1000,1000);
     frame.setVisible(true);
+    frame.addComponentListener(new ComponentAdapter() {				//Qui aggiungo il listener
+    	  public void componentResized(ComponentEvent event) {		//per controllare il ridimensionamento.
+    		  globalwidth = frame.getSize().width;
+    		  globalheight = frame.getSize().height;
+    		  System.out.println(globalwidth + " x " + globalheight);
+    		  //frame.repaint();
+    	  }
+    });
   }
 
  
