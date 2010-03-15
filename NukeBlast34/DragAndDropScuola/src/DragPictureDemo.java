@@ -65,10 +65,18 @@ import javax.swing.JPanel;
 
 public class DragPictureDemo extends JPanel implements ActionListener{
 
-  static int globalwidth = 0 , globalheight = 0;	//Variabili globali per condividere fra i componenti le dimensioni del frame.
+    //Pannelli per scegliere chi muove, cosa e dove disporre le carte.
 	
-  DTPicture moveA, moveB, moveC, whatA, whatB, whatC, whatD, whatE, move1, move2,
-            move3, move4, move5, what1, what2, what3, what4, what5, trash;
+	static JPanel MovePanel  = new JPanel(new GridLayout( 1, 3, 0, 0));
+    static JPanel WhatPanel  = new JPanel(new GridLayout( 1, 5, 0, 0));
+    static JPanel TablePanel = new JPanel(new GridLayout( 2, 5, 0, 0));
+    static JPanel TrashPanel = new JPanel(new GridLayout( 1, 1, 0, 0));
+    static JPanel VerifyPanel = new JPanel();
+	
+    static int globalwidth = 0 , globalheight = 0;	//Variabili globali per condividere fra i componenti le dimensioni del frame.
+	
+    DTPicture moveA, moveB, moveC, whatA, whatB, whatC, whatD, whatE, move1, move2,
+              move3, move4, move5, what1, what2, what3, what4, what5, trash;
 
   /*  
   static String denari1 = "Denari1";
@@ -109,14 +117,6 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     picHandler = new PictureTransferHandler(-1);
     picHandler2 = new PictureTransferHandler(1);
     picHandler3 = new PictureTransferHandler(0);
-    
-    //Pannelli per scegliere chi muove, cosa e dove disporre le carte.
-    
-    JPanel MovePanel  = new JPanel(new GridLayout( 1, 3, 0, 0));
-    JPanel WhatPanel  = new JPanel(new GridLayout( 1, 5, 0, 0));
-    JPanel TablePanel = new JPanel(new GridLayout( 2, 5, 0, 0));
-    JPanel TrashPanel = new JPanel(new GridLayout( 1, 1, 0, 0));
-    JPanel VerifyPanel = new JPanel();
     
     //Attribuzione dei nomi delle immagini di chi muove.
     
@@ -261,18 +261,18 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //add(trash,4,4);
     //add(verifica,5,5);
     
-    MovePanel.setSize( globalwidth , 140);
+    //MovePanel.setSize( globalwidth , 140);
     add(MovePanel);
-    WhatPanel.setSize( globalwidth , 140);
+    //WhatPanel.setSize( globalwidth , 140);
     WhatPanel.setLocation( 0 , 180 );
     add(WhatPanel);
-    TablePanel.setSize( globalwidth , 280 );
+    //TablePanel.setSize( globalwidth , 280 );
     TablePanel.setLocation( 0 , 360 );
     add(TablePanel);
-    TrashPanel.setSize( globalwidth , 140 );
+    //TrashPanel.setSize( globalwidth , 140 );
     TrashPanel.setLocation( 0 , 600 );
     add(TrashPanel);
-    VerifyPanel.setSize( globalwidth , 50 );
+    //VerifyPanel.setSize( globalwidth , 50 );
     VerifyPanel.setLocation( 0 , 760 );
     add(VerifyPanel);
     
@@ -328,11 +328,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     		  globalwidth = (int)frame.getSize().getWidth();
     		  globalheight = (int)frame.getSize().getHeight();
     		  System.out.println(globalwidth + " x " + globalheight);
+    		  jpanelsUpdate();
     	  }
     });
   }
-
- 
 
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -381,6 +380,24 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	}
   }
 
+  public static void jpanelsUpdate(){
+	  
+	  System.out.println("Repaint!!!");
+	  
+	  MovePanel.setSize( globalwidth , 140 );
+	  WhatPanel.setSize( globalwidth , 140 );
+	  TablePanel.setSize( globalwidth , 140 );
+	  TrashPanel.setSize( globalwidth , 140 );
+	  VerifyPanel.setSize( globalwidth , 140 );
+
+	  MovePanel.repaint();
+	  WhatPanel.repaint();
+	  TablePanel.repaint();
+	  TrashPanel.repaint();
+	  VerifyPanel.repaint();
+	   
+  }
+  
   public static void main(String[] args) {
     //Schedule a job for the event-dispatching thread:
     //creating and showing this application's GUI.
