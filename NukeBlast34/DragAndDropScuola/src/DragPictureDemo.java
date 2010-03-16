@@ -261,19 +261,18 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //add(trash,4,4);
     //add(verifica,5,5);
     
-    //MovePanel.setSize( globalwidth , 140);
     add(MovePanel);
-    //WhatPanel.setSize( globalwidth , 140);
-    WhatPanel.setLocation( 0 , 180 );
+    //WhatPanel.setSize( globalwidth , 180);
+    WhatPanel.setLocation( 0 , 140 );
     add(WhatPanel);
-    //TablePanel.setSize( globalwidth , 280 );
-    TablePanel.setLocation( 0 , 360 );
+    //TablePanel.setSize( globalwidth , 360 );
+    TablePanel.setLocation( 0 , 280 );
     add(TablePanel);
-    //TrashPanel.setSize( globalwidth , 140 );
-    TrashPanel.setLocation( 0 , 600 );
+    //TrashPanel.setSize( globalwidth , 680 );
+    TrashPanel.setLocation( 0 ,580  );
     add(TrashPanel);
-    //VerifyPanel.setSize( globalwidth , 50 );
-    VerifyPanel.setLocation( 0 , 760 );
+    //VerifyPanel.setSize( globalwidth , 780  );
+    VerifyPanel.setLocation( 0 ,700 );
     add(VerifyPanel);
     
     //setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -329,6 +328,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     		  globalheight = (int)frame.getSize().getHeight();
     		  System.out.println(globalwidth + " x " + globalheight);
     		  jpanelsUpdate();
+    		  frame.setVisible(true);
     	  }
     });
   }
@@ -384,18 +384,19 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	  
 	  System.out.println("Repaint!!!");
 	  
-	  MovePanel.setSize( globalwidth , 140 );
-	  WhatPanel.setSize( globalwidth , 140 );
-	  TablePanel.setSize( globalwidth , 140 );
-	  TrashPanel.setSize( globalwidth , 140 );
-	  VerifyPanel.setSize( globalwidth , 140 );
-
-	  MovePanel.repaint();
+	  
+	   MovePanel.setSize( globalwidth , 140 );
+	   WhatPanel.setSize( globalwidth , 140 );
+	   TablePanel.setSize( globalwidth , 300 );
+	   TrashPanel.setSize( globalwidth , 100 );
+	   VerifyPanel.setSize( globalwidth , 30 );
+	  /*
+	   MovePanel.repaint();
 	  WhatPanel.repaint();
 	  TablePanel.repaint();
 	  TrashPanel.repaint();
 	  VerifyPanel.repaint();
-	   
+	   */
   }
   
   public static void main(String[] args) {
@@ -403,7 +404,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     //creating and showing this application's GUI.
 	
 	globalwidth = 800;
-	globalheight = 600;
+	globalheight = 800;
 	
     javax.swing.SwingUtilities.invokeLater(new Runnable() {
       public void run() {
