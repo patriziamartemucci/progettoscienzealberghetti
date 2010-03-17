@@ -59,6 +59,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 
   static int globalwidth = 0 , globalheight = 0 , panelsgap = 0;
   
+  //Variabile che conta i tentativi rimasti
+  
+  static byte counter = 10;
+  
   //Costanti da utilizzare per il calcolo delle varie dimensioni e coordinate di posizione.
   
   final static int IMG_X = 96 , IMG_Y = 128 , BUT_Y = 40 , TRSH_X = 80;
@@ -119,7 +123,9 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
     //Randomizzazione per chi muove.
     
-    for(int i=0;i<3;i++) vetMovernd[i]=vetMove[i];
+    for(int i=0;i<3;i++)
+    	vetMovernd[i]=vetMove[i];
+    
     for(int i=0;i<100;i++){
     	int x=(int)(Math.random()*3);
     	int y=(int)(Math.random()*3);
@@ -130,7 +136,9 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
     //Randomizzazione per cosa è mosso.
     
-    for(int i=0;i<5;i++) vetWhatrnd[i]=vetWhat[i];
+    for(int i=0;i<5;i++)
+    	vetWhatrnd[i]=vetWhat[i];
+    
     for(int i=0;i<100;i++){
     	int x=(int)(Math.random()*5);
     	int y=(int)(Math.random()*5);
@@ -314,46 +322,58 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   public void actionPerformed(ActionEvent e) {
 	  
 	if(e.getActionCommand().equals("Verifica")){
-		//System.out.println("Hai cliccato sul pulsante verifica");
-		System.out.println("pic1.image.getsource: "+move1.image.getSource());
+		
+		//Controlla se ci sono tessere vuote.
+		
+		if ( move1.image != null && move1.image != null &&
+			 move1.image != null && move1.image != null &&
+			 move1.image != null && move1.image != null &&
+			 move1.image != null && move1.image != null &&
+			 move1.image != null && move1.image != null ){
+		
+			//Se sono tutte piene, controlla che ci siano ancora tentativi disponibili.
+			
+			if ( counter != 0 ){
+		
+				//Se ancora va tutto bene, allora controlla che le tessere siano nell'ordine giusto.
+				//Se lo sono, comunica la vittoria e i tentativi necessari,
+				//altrimenti toglie un tentativo ( variabile globale counter ) e invita a ritentare.
+				
+				if( move1.image.getSource().equals(vetMove[1].getSource()) &&
+					move2.image.getSource().equals(vetMove[0].getSource()) &&
+					move3.image.getSource().equals(vetMove[2].getSource()) &&
+					move4.image.getSource().equals(vetMove[2].getSource()) &&
+					move5.image.getSource().equals(vetMove[1].getSource()) &&
+					what1.image.getSource().equals(vetWhat[1].getSource()) &&
+					what2.image.getSource().equals(vetWhat[2].getSource()) &&
+					what3.image.getSource().equals(vetWhat[3].getSource()) &&
+					what4.image.getSource().equals(vetWhat[0].getSource()) &&
+					what5.image.getSource().equals(vetWhat[4].getSource()) )
+				{
+					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in "
+												 	 	 + (11 - counter) + " tentativ"
+												 	 	 + ( (11 - counter) == 1 ? 'o' : 'i' ) + '.' );
+				}
+				else
+				{
+					counter--;
+					JOptionPane.showMessageDialog( null, "Sbagliato. Ti rimangono ancora " + counter + " tentativi: riprova!" );
+				}
 
-		int conta=0;
-		//if(move1.image.)
-/*		for(int i=0;i<6;i++){
-			switch (i){
-				case 0:
-					if(whatD.image!=null && vetImage[0].getSource().equals(pic7.image.getSource()))conta++;
-					break;
-					
-				case 1:
-					if(whatE.image!=null && vetImage[1].getSource().equals(pic8.image.getSource()))conta++;
-					break;
-					
-				case 2:
-					if(move1.image!=null && vetImage[2].getSource().equals(pic9.image.getSource()))conta++;
-					break;
-					
-				case 3:
-					if(move2.image!=null && vetImage[3].getSource().equals(pic10.image.getSource()))conta++;
-					break;
-					
-				case 4:
-					if(move3.image!=null && vetImage[4].getSource().equals(pic11.image.getSource()))conta++;
-					break;
-					
-				case 5:
-					if(move4.image!=null && vetImage[5].getSource().equals(pic12.image.getSource()))conta++;
+			//Se non ci sono più tentativi a disposizione, comunica la sconfitta.
+				
 			}
+			else
+			{
+				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+			}
+
+		//Se ci sono tessere vuote, chiede di ricontrollarle.
 			
 		}
-*/
-		if(conta==6){
-			System.out.println("Tutto OK!!!!");
-			JOptionPane.showMessageDialog(null,"Hai vinto!!! ");
-		}
-		else{
-			System.out.println("Riprova!");
-			JOptionPane.showMessageDialog(null,"Hai perso!!! ");
+		else
+		{
+			JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla!" );
 		}
 	}
   }
