@@ -325,11 +325,11 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 		
 		//Controlla se ci sono tessere vuote.
 		
-		if ( move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null ){
+		if ( move1.image != null && move2.image != null &&
+			 move3.image != null && move4.image != null &&
+			 move5.image != null && what1.image != null &&
+			 what2.image != null && what3.image != null &&
+			 what4.image != null && what5.image != null ){
 		
 			//Se sono tutte piene, controlla che ci siano ancora tentativi disponibili.
 			
