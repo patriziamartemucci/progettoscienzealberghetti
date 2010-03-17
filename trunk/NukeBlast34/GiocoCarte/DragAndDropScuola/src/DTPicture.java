@@ -133,16 +133,33 @@ class DTPicture extends Picture implements MouseMotionListener {
 
       int dx = Math.abs(e.getX() - firstMouseEvent.getX());
       int dy = Math.abs(e.getY() - firstMouseEvent.getY());
+      
       //Arbitrarily define a 5-pixel shift as the
       //official beginning of a drag.
-      if (dx > 5 || dy > 5) {
-        //This is a drag, not a click.
-        JComponent c = (JComponent) e.getSource();
-        System.out.println("Classe DTPicuture.  metodo mouseDragged -- e.getSource: "+e.getSource());
-        TransferHandler handler = c.getTransferHandler();
-        //Tell the transfer handler to initiate the drag.
-        handler.exportAsDrag(c, firstMouseEvent, action);
-        firstMouseEvent = null;
+      
+      //---------------------------------------------------------------------------------------------\
+      //Qui ci vuole un commento italiano.															 |
+      //In questo if vado a controllare se per caso l'immagine non corrisponde a quella del cestino. |
+      //Se NON corrisponde, vado a controlare se è un drag o un click.								 |
+      //---------------------------------------------------------------------------------------------/
+      
+      if( !this.image.equals( createImageIcon("trash.jpg", "trash").getImage() ) ){
+    	  
+    	  if (dx > 5 || dy > 5) {
+    		  
+    		  //This is a drag, not a click.
+    		  
+    		  JComponent c = (JComponent) e.getSource();
+    		  System.out.println("Classe DTPicuture.  metodo mouseDragged -- e.getSource: "+e.getSource());
+    		  TransferHandler handler = c.getTransferHandler();
+    		  
+    		  //Tell the transfer handler to initiate the drag.
+    		  
+    		  handler.exportAsDrag(c, firstMouseEvent, action);
+    		  firstMouseEvent = null;
+    		  
+    	  }
+    	  
       }
     }
     
