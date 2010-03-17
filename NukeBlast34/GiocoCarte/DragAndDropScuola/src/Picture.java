@@ -22,7 +22,6 @@ class Picture extends JComponent implements MouseListener, FocusListener,
   public Picture(Image image) {
 		
     this.image = image;
-    //this.setSize(96, 128);
     setFocusable(true);
     addMouseListener(this);
     addFocusListener(this);
@@ -56,41 +55,34 @@ class Picture extends JComponent implements MouseListener, FocusListener,
     //indicating that it doesn't have focus.
     this.repaint();
   }
-
-  //Returns an ImageIcon, or null if the path was invalid.
-  
-  protected static ImageIcon createImageIcon(String path, String description) {
-    java.net.URL imageURL = DragPictureDemo.class.getResource(path);
-    System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
-    if (imageURL == null) {
-      System.err.println("Resource not found: " + path);
-      return null;
-    } else {
-      return new ImageIcon(imageURL, description);
-    }
-  }
   
   protected void paintComponent(Graphics graphics) {
     Graphics g = graphics.create();
 
     //Draw in our entire space, even if isOpaque is false.
+    
     g.setColor(Color.WHITE);
     g.fillRect(0, 0, image == null ? 96 : image.getWidth(this),
-        image == null ? 128 : image.getHeight(this));
+               image == null ? 128 : image.getHeight(this));
 
     if (image != null) {
-      //Draw image at its natural size of 125x125.
+    	
+      //Draw image at its natural size of 96x128.
+      
       g.drawImage(image, 0, 0, this);
+      
     }
     
     //Add a border, red if picture currently has focus
-    if (isFocusOwner()) {
-      g.setColor(Color.RED);
-    } else {
-      g.setColor(Color.BLACK);
-    }
-    g.drawRect(0, 0, image == null ? 125 : image.getWidth(this),
-        image == null ? 125 : image.getHeight(this));
+    
+    if (isFocusOwner())
+    	g.setColor(Color.RED);
+    else
+    	g.setColor(Color.BLACK);
+
+    g.drawRect(0, 0, image == null ? 96 : image.getWidth(this),
+               image == null ? 128 : image.getHeight(this));
+    
     g.dispose();
   }
 }
