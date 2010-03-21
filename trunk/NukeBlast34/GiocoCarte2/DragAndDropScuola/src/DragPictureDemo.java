@@ -302,17 +302,16 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 
     //Costruisce la barra dei menu.
     
-    minewgame.addActionListener(new ActionListener(){
+    /*minewgame.addActionListener(new ActionListener(){
     	public void actionPerformed(ActionEvent event){
     		
-    		createAndShowGUI();
     		counter = 10;
     		
     		}
     	} );
     mgame.add( minewgame );
     
-    mgame.addSeparator();
+    mgame.addSeparator();*/
     miexit.addActionListener(new ActionListener(){
     	public void actionPerformed(ActionEvent event){
     		System.exit( 0 );
