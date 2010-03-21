@@ -483,6 +483,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in "
 												 	 	 + (11 - counter) + " tentativ"
 												 	 	 + ( (11 - counter) == 1 ? 'o' : 'i' ) + '.' );
+					verifica.setEnabled(false);//aggiunto -- Patrizia
 					counter=10;//aggiunto. In caso di vittoria azzero il contatore -- Patrizia
 				}
 				else
