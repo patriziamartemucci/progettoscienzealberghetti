@@ -47,6 +47,18 @@ import javax.swing.*;
 
 public class DragPictureDemo extends JPanel implements ActionListener{
 	
+  //Qua ci sono tutti i componenti della barra dei menù, le loro tendine e le loro voci.
+	
+  static JMenuBar mainmenu = new JMenuBar();
+  
+  static JMenu mgame = new JMenu("Gioco");
+  static JMenu mhelp = new JMenu ("?");
+  
+  static JMenuItem minewgame = new JMenuItem ( "Nuova partita" );
+  static JMenuItem miexit = new JMenuItem ( "Esci" );
+  static JMenuItem mihints = new JMenuItem ( "Come giocare..." );
+  static JMenuItem micredits = new JMenuItem ( "Crediti" );
+	
   //Pannelli per scegliere chi muove, cosa e dove disporre le carte.
 	
   static JPanel MovePanel  = new JPanel(new GridLayout( 1, 3, 0, 0));
@@ -77,7 +89,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   
   //Costanti da utilizzare per il calcolo delle varie dimensioni e coordinate di posizione.
   
-  final static int IMG_X = 98 , IMG_Y = 130 , BUT_Y = 50 , TRSH_X = 82 , LBL_X = 200 , panelsHgap = 20;
+  final static int IMG_X = 98 , IMG_Y = 130 , BUT_Y = 50 , TRSH_X = 82 , LBL_X = 250 , panelsHgap = 20;
   
   //Oggetti DTPicture che serviranno nella GUI.
   
@@ -288,6 +300,47 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     
     jpanelsUpdate();
 
+    //Costruisce la barra dei menu.
+    
+    minewgame.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent event){
+    		
+    		createAndShowGUI();
+    		counter = 10;
+    		
+    		}
+    	} );
+    mgame.add( minewgame );
+    
+    mgame.addSeparator();
+    miexit.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent event){
+    		System.exit( 0 );
+    		}
+    	} );
+    mgame.add( miexit );
+    mainmenu.add( mgame );
+    
+    mihints.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent event){
+    		JOptionPane.showMessageDialog( null, "Nelle caselle bianche dovete mettere le varie figure secondo queste regole:\n" +
+    											 "_l'ordine cronologico va da sinistra verso destra;\n" +
+    											 "_chi muove va nella fila sopra mentre chi è mosso va sotto di esso;\n" +
+    											 "_la sequenza esatta rappresenta il ciclo di azioni che si deve fare per ottenere" +
+    											 " la farina dal grano usando un mulino ad acqua." );
+    		}
+    	} );
+    mhelp.add( mihints );
+    
+    micredits.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent event){
+    		JOptionPane.showMessageDialog( null, "Sviluppato da:\n\nprof. Martemucci Patrizia\nLuca Biavati\nValgimigli Filip\n\n" +
+    											 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved." );
+    		}
+    	} );
+    mhelp.add( micredits );
+    mainmenu.add( mhelp );
+    
     //Aggiunge le label.
 
     add(MoveLabel);
@@ -327,18 +380,25 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   
   private static void createAndShowGUI() {
 
+	//Ripristino i tentativi.
+	  
+	counter = 10;
+	  
     //Crea il frame, toglie il LayoutManager e abilità il tasto X per chiudere la finestra.
 	//Dichiarato final perchè se no il listener rompe.
 	  
     final JFrame frame = new JFrame("Gioco delle carte di chi muove cosa.");
     frame.setLayout(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-    //Crea una nuova istanza della GUI e la imposta come pannello del contenuto del frame.
+
+    //Crea una nuova istanza della GUI, la imposta come pannello del contenuto del frame
+    //e aggiunge la barra dei menu.
     
     DragPictureDemo mainpanel = new DragPictureDemo();
     mainpanel.setOpaque(true);
-    frame.setContentPane(mainpanel);
+    frame.setContentPane( mainpanel );
+    
+    frame.setJMenuBar( mainmenu );
 
     //Impostazioni del frame per visualizzarlo bene.
     
@@ -357,7 +417,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     		  //allora viene ripristinata quella minima.
     		  
     		  globalwidth = Math.max( (int)frame.getSize().getWidth() , IMG_X*5 + LBL_X + 60 );
-    		  globalheight = Math.max( (int)frame.getSize().getHeight() , IMG_Y*4 + IMG_X + BUT_Y*2 );
+    		  globalheight = Math.max( (int)frame.getSize().getHeight() , IMG_Y*4 + IMG_X + BUT_Y*2 + 80 );
     		  
     		  //Aggiornamento delle dimensioni del frame.
     		  
@@ -384,10 +444,15 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 		//Controlla se ci sono tessere vuote.
 		
 		if ( move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null &&
-			 move1.image != null && move1.image != null ){
+			 move2.image != null && move1.image != null &&
+			 move3.image != null && move1.image != null &&
+			 move4.image != null && move1.image != null &&
+			 move5.image != null && move1.image != null &&
+			 what1.image != null && move1.image != null &&
+			 what2.image != null && move1.image != null &&
+			 what3.image != null && move1.image != null &&
+			 what4.image != null && move1.image != null &&
+			 what5.image != null && move1.image != null ){
 		
 			//Se sono tutte piene, controlla che ci siano ancora tentativi disponibili.
 			
@@ -488,12 +553,12 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	globalwidth = IMG_X*5 + LBL_X;
 	globalheight = IMG_Y*4 + IMG_X + BUT_Y*2 + panelsVgap*7;
 	
-    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+    /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
       
     	public void run() {
-    		createAndShowGUI();
+    		*/createAndShowGUI();/*
     	}
-    });
+    });*/
   }
 }
 
