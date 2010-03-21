@@ -208,46 +208,8 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     WhatPanel.add(whatE);
     
     //I dieci contenitori dove disporre le immagini.
+    inizializzaCaselleVuote();//ho racchiuso in un metodo l'inizializzazione -- Patrizia
     
-    move1 = new DTPicture(null,true);
-    move1.setTransferHandler(picHandler2);
-    TablePanel.add(move1);
-    
-    move2 = new DTPicture(null,true);
-    move2.setTransferHandler(picHandler2);
-    TablePanel.add(move2);
-    
-    move3 = new DTPicture(null,true);
-    move3.setTransferHandler(picHandler2);
-    TablePanel.add(move3);
-    
-    move4 = new DTPicture(null,true);
-    move4.setTransferHandler(picHandler2);
-    TablePanel.add(move4);
-    
-    move5 = new DTPicture(null,true);
-    move5.setTransferHandler(picHandler2);
-    TablePanel.add(move5);
-    
-    what1 = new DTPicture(null,true);
-    what1.setTransferHandler(picHandler2);
-    TablePanel.add(what1);
-    
-    what2 = new DTPicture(null,true);
-    what2.setTransferHandler(picHandler2);
-    TablePanel.add(what2);
-    
-    what3 = new DTPicture(null,true);
-    what3.setTransferHandler(picHandler2);
-    TablePanel.add(what3);
-    
-    what4 = new DTPicture(null,true);
-    what4.setTransferHandler(picHandler2);
-    TablePanel.add(what4);
-    
-    what5 = new DTPicture(null,true);
-    what5.setTransferHandler(picHandler2);
-    TablePanel.add(what5);
     
     trash = new DTPicture(createImageIcon("trash.jpg", "trash").getImage(),false);
     trash.setTransferHandler(picHandler3); 
@@ -309,34 +271,22 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     		
     		}
     	} );
-    mgame.add( minewgame );
+    	*/
+    mgame.add( minewgame );//ho tolto il commento- Patrizia
+    minewgame.addActionListener(this);//aggiunto -Patrizia
     
-    mgame.addSeparator();*/
-    miexit.addActionListener(new ActionListener(){
-    	public void actionPerformed(ActionEvent event){
-    		System.exit( 0 );
-    		}
-    	} );
+    mgame.addSeparator();
+   
     mgame.add( miexit );
+    miexit.addActionListener(this);//modificato-Patrizia
     mainmenu.add( mgame );
     
-    mihints.addActionListener(new ActionListener(){
-    	public void actionPerformed(ActionEvent event){
-    		JOptionPane.showMessageDialog( null, "Nelle caselle bianche dovete mettere le varie figure secondo queste regole:\n" +
-    											 "_l'ordine cronologico va da sinistra verso destra;\n" +
-    											 "_chi muove va nella fila sopra mentre chi è mosso va sotto di esso;\n" +
-    											 "_la sequenza esatta rappresenta il ciclo di azioni che si deve fare per ottenere" +
-    											 " la farina dal grano usando un mulino ad acqua." );
-    		}
-    	} );
+    mihints.addActionListener(this);//modificato-Patrizia
+    	
     mhelp.add( mihints );
     
-    micredits.addActionListener(new ActionListener(){
-    	public void actionPerformed(ActionEvent event){
-    		JOptionPane.showMessageDialog( null, "Sviluppato da:\n\nprof. Martemucci Patrizia\nLuca Biavati\nValgimigli Filip\n\n" +
-    											 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved." );
-    		}
-    	} );
+    micredits.addActionListener(this);//modificato-Patrizia
+    	
     mhelp.add( micredits );
     mainmenu.add( mhelp );
     
@@ -359,6 +309,64 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 
   }
     
+  //metodo per creare le caselle vuote (inizialmente) -- Patrizia
+  private void inizializzaCaselleVuote(){
+	  	move1 = new DTPicture(null,true);
+	    move1.setTransferHandler(picHandler2);
+	    TablePanel.add(move1);
+	    
+	    move2 = new DTPicture(null,true);
+	    move2.setTransferHandler(picHandler2);
+	    TablePanel.add(move2);
+	    
+	    move3 = new DTPicture(null,true);
+	    move3.setTransferHandler(picHandler2);
+	    TablePanel.add(move3);
+	    
+	    move4 = new DTPicture(null,true);
+	    move4.setTransferHandler(picHandler2);
+	    TablePanel.add(move4);
+	    
+	    move5 = new DTPicture(null,true);
+	    move5.setTransferHandler(picHandler2);
+	    TablePanel.add(move5);
+	    
+	    what1 = new DTPicture(null,true);
+	    what1.setTransferHandler(picHandler2);
+	    TablePanel.add(what1);
+	    
+	    what2 = new DTPicture(null,true);
+	    what2.setTransferHandler(picHandler2);
+	    TablePanel.add(what2);
+	    
+	    what3 = new DTPicture(null,true);
+	    what3.setTransferHandler(picHandler2);
+	    TablePanel.add(what3);
+	    
+	    what4 = new DTPicture(null,true);
+	    what4.setTransferHandler(picHandler2);
+	    TablePanel.add(what4);
+	    
+	    what5 = new DTPicture(null,true);
+	    what5.setTransferHandler(picHandler2);
+	    TablePanel.add(what5);
+  }
+  
+  
+  //per azzerare le caselle bianche -- Patrizia
+  private void impostaCaselleVuote(){
+	  move1.setImage(null);
+	  move2.setImage(null);
+	  move3.setImage(null);
+	  move4.setImage(null);
+	  move5.setImage(null);
+	  what1.setImage(null);
+	  what2.setImage(null);
+	  what3.setImage(null);
+	  what4.setImage(null);
+	  what5.setImage(null);
+	    
+  }
   //Returns an ImageIcon, or null if the path was invalid.
   
   protected static ImageIcon createImageIcon(String path, String description) {
@@ -475,6 +483,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in "
 												 	 	 + (11 - counter) + " tentativ"
 												 	 	 + ( (11 - counter) == 1 ? 'o' : 'i' ) + '.' );
+					counter=10;//aggiunto. In caso di vittoria azzero il contatore -- Patrizia
 				}
 				else
 				{
@@ -488,15 +497,49 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 			else
 			{
 				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+				verifica.setEnabled(false);//aggiunto -- Patrizia
 			}
 
 		//Se ci sono tessere vuote, chiede di ricontrollarle.
 			
 		}
 		else
-		{
-			JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla!" );
+		{	
+			counter--;//aggiunto --Patrizia
+			if(counter==0){//aggiunto -- Patrizia
+				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+				verifica.setEnabled(false);//aggiunto -- Patrizia
+			}
+			else{
+				JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla! Ti rimangono ancora " + counter + " tentativi." );
+				
+			}
+			
 		}
+	}
+	
+	//gli if seguenti servono per gestire le voci del menu -- Patrizia
+	if (e.getSource()==minewgame){
+		System.out.println("Hai premuto \"Nuova partita\" ");
+		impostaCaselleVuote();
+		counter=10;
+		verifica.setEnabled(true);
+		jpanelsUpdate();
+		
+	}
+	if(e.getSource()==miexit){
+		System.exit(0);
+	}
+	if(e.getSource()==mihints){
+		JOptionPane.showMessageDialog( null, "Nelle caselle bianche dovete mettere le varie figure secondo queste regole:\n" +
+				 "_l'ordine cronologico va da sinistra verso destra;\n" +
+				 "_chi muove va nella fila sopra mentre chi è mosso va sotto di esso;\n" +
+				 "_la sequenza esatta rappresenta il ciclo di azioni che si deve fare per ottenere" +
+				 " la farina dal grano usando un mulino ad acqua." );
+	}
+	if(e.getSource()==micredits){
+		JOptionPane.showMessageDialog( null, "Sviluppato da:\n\nprof. Martemucci Patrizia\nLuca Biavati\nValgimigli Filip\n\n" +
+				 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.");
 	}
   }
 
