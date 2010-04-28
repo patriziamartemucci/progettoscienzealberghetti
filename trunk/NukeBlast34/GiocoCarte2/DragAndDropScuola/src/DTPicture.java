@@ -28,8 +28,8 @@ class DTPicture extends Picture implements MouseMotionListener {
   //Returns an ImageIcon, or null if the path was invalid.
   
   protected static ImageIcon createImageIcon(String path, String description) {
-    java.net.URL imageURL = LaMagiaDellAcqua.class.getResource(path);
-    System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
+    java.net.URL imageURL = DragPictureDemo.class.getResource(path);
+    //System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
     if (imageURL == null) {
       System.err.println("Resource not found: " + path);
       return null;
@@ -41,9 +41,9 @@ class DTPicture extends Picture implements MouseMotionListener {
   public DTPicture(Image image, boolean trasferibile) {
 
 	super(image);
-    System.out.println("Classe DTPicture. Costruttore -- image: "+image);
+    //System.out.println("Classe DTPicture. Costruttore -- image: "+image);
     addMouseMotionListener(this);
-    System.out.println("Classe DTPicture. Metodo Costruttore ");
+    //System.out.println("Classe DTPicture. Metodo Costruttore ");
     this.trasfer=trasferibile;
     //Add the cut/copy/paste key bindings to the input map.
     //Note that this step is redundant if you are installing
@@ -80,14 +80,21 @@ class DTPicture extends Picture implements MouseMotionListener {
         TransferHandler.getPasteAction());
         
       */
+
+    
+    /*Se si vuole includere il copia-incolla togliere questo commento
+     */
     if (installInputMapBindings) {
         InputMap imap = this.getInputMap();
         //imap.put(KeyStroke.getKeyStroke("ctrl X"), TransferHandler
         //    .getCutAction().getValue(Action.NAME));
+        
+       
         imap.put(KeyStroke.getKeyStroke("ctrl C"), TransferHandler
             .getCopyAction().getValue(Action.NAME));
         imap.put(KeyStroke.getKeyStroke("ctrl V"), TransferHandler
             .getPasteAction().getValue(Action.NAME));
+            
       }
     
     //Add the cut/copy/paste actions to the action map.
@@ -100,6 +107,9 @@ class DTPicture extends Picture implements MouseMotionListener {
         TransferHandler.getCopyAction());
     map.put(TransferHandler.getPasteAction().getValue(Action.NAME),
         TransferHandler.getPasteAction());
+        /*
+        *Fine commento per includere il copia-incolla
+        */
   }
 
   public void setImage(Image image) {
@@ -150,7 +160,7 @@ class DTPicture extends Picture implements MouseMotionListener {
     		  //This is a drag, not a click.
     		  
     		  JComponent c = (JComponent) e.getSource();
-    		  System.out.println("Classe DTPicuture.  metodo mouseDragged -- e.getSource: "+e.getSource());
+    		  //System.out.println("Classe DTPicuture.  metodo mouseDragged -- e.getSource: "+e.getSource());
     		  TransferHandler handler = c.getTransferHandler();
     		  
     		  //Tell the transfer handler to initiate the drag.
