@@ -28,7 +28,7 @@ class DTPicture extends Picture implements MouseMotionListener {
   //Returns an ImageIcon, or null if the path was invalid.
   
   protected static ImageIcon createImageIcon(String path, String description) {
-    java.net.URL imageURL = DragPictureDemo.class.getResource(path);
+    java.net.URL imageURL = GiocoDellAcqua.class.getResource(path);
     System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
     if (imageURL == null) {
       System.err.println("Resource not found: " + path);
