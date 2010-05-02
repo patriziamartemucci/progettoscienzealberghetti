@@ -497,7 +497,18 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					{
 						
 					JOptionPane.showMessageDialog( null, "Sbagliato. Ti rimangono ancora " + counter +
-														 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!" );
+														 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!\n\n" +
+														 "Le tessere al posto giusto sono la :" +
+														 ( ( move1.image.getSource().equals(vetMove[1].getSource()) ) ? "\n\t_Prima" : "" ) +
+														 ( ( move2.image.getSource().equals(vetMove[0].getSource()) ) ? "\n\t_Seconda" : "" ) +
+														 ( ( move3.image.getSource().equals(vetMove[2].getSource()) ) ? "\n\t_Terza" : "" ) +
+														 ( ( move4.image.getSource().equals(vetMove[2].getSource()) ) ? "\n\t_Quarta" : "" ) +
+														 ( ( move5.image.getSource().equals(vetMove[1].getSource()) ) ? "\n\t_Quinta" : "" ) +
+														 ( ( what1.image.getSource().equals(vetWhat[1].getSource()) ) ? "\n\t_Sesta" : "" ) +
+														 ( ( what2.image.getSource().equals(vetWhat[2].getSource()) ) ? "\n\t_Settima" : "" ) +
+														 ( ( what3.image.getSource().equals(vetWhat[3].getSource()) ) ? "\n\t_Ottava" : "" ) +
+														 ( ( what4.image.getSource().equals(vetWhat[0].getSource()) ) ? "\n\t_Nona" : "" ) +
+														 ( ( what5.image.getSource().equals(vetWhat[4].getSource()) ) ? "\n\t_Decima" : "" ) );
 					
 					}
 				}
