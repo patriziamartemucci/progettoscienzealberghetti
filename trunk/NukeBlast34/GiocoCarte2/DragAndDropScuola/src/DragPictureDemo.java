@@ -45,10 +45,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class DragPictureDemo extends JPanel implements ActionListener{
+
+
+public class DragPictureDemo extends JPanel implements ActionListener {
 	
-  //Qua ci sono tutti i componenti della barra dei menù, le loro tendine e le loro voci.
-	
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 379999346711115098L;
+	//Qua ci sono tutti i componenti della barra dei menù, le loro tendine e le loro voci.
+	static boolean win=false;
   static JMenuBar mainmenu = new JMenuBar();
   
   static JMenu mgame = new JMenu("Gioco");
@@ -367,7 +373,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   
   protected static ImageIcon createImageIcon(String path, String description) {
     java.net.URL imageURL = DragPictureDemo.class.getResource(path);
-    System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
+    //System.out.println("metodo createImageIcon.  Path: "+path+"  --  description: "+description);
     if (imageURL == null) {
       System.err.println("Resource not found: " + path);
       return null;
@@ -437,10 +443,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     	  }
     });
   }
-
-  @Override
-  
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed ( ActionEvent e ) {
 	  
 	if(e.getActionCommand().equals("Verifica")){
 		
@@ -479,8 +482,23 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in " +
 														 (6 - counter) + " tentativ" +
 														 ( (6 - counter) == 1 ? 'o' : 'i' ) + '.' );
+					verifica.setEnabled(false);											//aggiunto -- Patrizia
+					Frame f= new Frame (" HAI VINTO ");
+					f.setSize(500,400);
 					
-					verifica.setEnabled(false);															//aggiunto -- Patrizia
+					Win pp= new Win(50);
+					pp.setBackground(Color.white);
+					f.add(pp);
+					f.setVisible(true);
+					JOptionPane.showMessageDialog(null,"Sei davvero un esperto di mulini ad acqua e del loro funzionamento!!",
+							"HAI VINTO!!!",JOptionPane.INFORMATION_MESSAGE);
+					/*try{
+						Thread.sleep((long)5000);
+					}catch(Exception e1){
+						System.err.println(e1);
+					}*/
+					
+					f.setVisible(false);
 					counter=5;								   //aggiunto. In caso di vittoria azzero il contatore -- Patrizia
 				}
 				else
@@ -489,7 +507,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					counter--;
 					if(counter==0){																	//aggiunto -- Patrizia
 						
-						JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+						JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" ,"GAME OVER",JOptionPane.ERROR_MESSAGE);
 						verifica.setEnabled(false);													//aggiunto -- Patrizia
 					
 					}
@@ -508,7 +526,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 														 ( ( what2.image.getSource().equals(vetWhat[2].getSource()) ) ? "\n\t_Settima" : "" ) +
 														 ( ( what3.image.getSource().equals(vetWhat[3].getSource()) ) ? "\n\t_Ottava" : "" ) +
 														 ( ( what4.image.getSource().equals(vetWhat[0].getSource()) ) ? "\n\t_Nona" : "" ) +
-														 ( ( what5.image.getSource().equals(vetWhat[4].getSource()) ) ? "\n\t_Decima" : "" ) );
+														 ( ( what5.image.getSource().equals(vetWhat[4].getSource()) ) ? "\n\t_Decima" : "" ),null,JOptionPane.INFORMATION_MESSAGE );
 					
 					}
 				}
@@ -519,7 +537,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 			else
 			{
 				
-				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" ,"GAME OVER",JOptionPane.ERROR_MESSAGE);
 				verifica.setEnabled(false);													//aggiunto -- Patrizia
 			
 			}
@@ -533,7 +551,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 			counter--;																		//aggiunto --Patrizia
 			if(counter==0){																	//aggiunto -- Patrizia
 				
-				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" ,"GAME OVER",JOptionPane.ERROR_MESSAGE);
 				verifica.setEnabled(false);													//aggiunto -- Patrizia
 			
 			}
@@ -541,7 +559,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 			{
 				
 				JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla! Ti rimangono ancora " + counter +
-													 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!" );
+													 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!" ,"Attenzione",JOptionPane.WARNING_MESSAGE);
 	
 			}
 			
@@ -552,7 +570,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	
 	if (e.getSource()==minewgame){
 		
-		System.out.println("Hai premuto \"Nuova partita\" ");
+		//System.out.println("Hai premuto \"Nuova partita\" ");
 		impostaCaselleVuote();
 		counter = 5;
 		verifica.setEnabled(true);
@@ -571,7 +589,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	}
 	if(e.getSource()==micredits){
 		JOptionPane.showMessageDialog( null, "Sviluppato da:\n\nprof. Martemucci Patrizia\nLuca Biavati\nValgimigli Filip\n\n" +
-				 							 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.");
+				 							 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.",null,JOptionPane.INFORMATION_MESSAGE);
 	}
   }
 
@@ -630,7 +648,9 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
       
     	public void run() {
-    		*/createAndShowGUI();/*
+    		*/
+	createAndShowGUI();
+	/*
     	}
     });*/
   }
