@@ -69,13 +69,13 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	
   //Etichette da mettere affianco i panel, per dare informazioni.
   
-  static JTextArea MoveLabel   = new JTextArea ("Questi sono i soggetti che muovono qualcosa." +
-  										  		"Prendi le immagini da qui per metterle nella prima fila"),
-  				   WhatLabel   = new JTextArea ("Questi, invece, sono gli oggetti che sono mossi da qualcuno o qualcosa." +
-  										  		"Prendi le immagini da qui per metterle nella prima fila"),
-  				   MvTblLabel  = new JTextArea ("In questa fila metti i soggetti in ordine cronologico, " +
-  				   								"cioè chi agisce prima va più a sinistra."),
-  				   WtTblLabel  = new JTextArea ("Qui metti gli oggetti mossi in corrispondenza del soggetto in alto che lo muove."),
+  static JTextArea MoveLabel   = new JTextArea ("Queste tre carte rappresentano chi o che cosa muove le parti del mulino."),
+  				   WhatLabel   = new JTextArea ("Queste cinque carte rappresentano le parti del mulino e il suo prodotto."),
+  				   MvTblLabel  = new JTextArea ("Sposta in questa fila le prime tre carte mettendole in ordine\n" +
+  				   								"(chi agisce prima va più a sinistra).\n" +
+  				   								"Puoi ripetere la stessa carta più volte."),
+  				   WtTblLabel  = new JTextArea ("Sposta in questa fila le carte che rappresentano le parti del mulino " + 
+  						   						"o il suo prodotto in corrispondenza di chi o che cosa le muove"),
   				   TrashLabel  = new JTextArea ("Sposta una carta qui per liberare il posto che occupa."),
   				   VerifyLabel = new JTextArea ("Quando hai finito, clicca qui per vedere se l'ordine è giusto. Buona fortuna!");
   
@@ -85,7 +85,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   
   //Variabile che conta i tentativi rimasti
   
-  static byte counter = 10;
+  static byte counter = 5;
   
   //Costanti da utilizzare per il calcolo delle varie dimensioni e coordinate di posizione.
   
@@ -208,9 +208,9 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     WhatPanel.add(whatE);
     
     //I dieci contenitori dove disporre le immagini.
-    inizializzaCaselleVuote();//ho racchiuso in un metodo l'inizializzazione -- Patrizia
-    
-    
+    //ho racchiuso in un metodo l'inizializzazione -- Patrizia
+    inizializzaCaselleVuote();
+        
     trash = new DTPicture(createImageIcon("trash.jpg", "trash").getImage(),false);
     trash.setTransferHandler(picHandler3); 
     TrashPanel.add(trash);
@@ -263,15 +263,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
     jpanelsUpdate();
 
     //Costruisce la barra dei menu.
-    
-    /*minewgame.addActionListener(new ActionListener(){
-    	public void actionPerformed(ActionEvent event){
-    		
-    		counter = 10;
-    		
-    		}
-    	} );
-    	*/
+
     mgame.add( minewgame );//ho tolto il commento- Patrizia
     minewgame.addActionListener(this);//aggiunto -Patrizia
     
@@ -310,8 +302,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
   }
     
   //metodo per creare le caselle vuote (inizialmente) -- Patrizia
+  
   private void inizializzaCaselleVuote(){
-	  	move1 = new DTPicture(null,true);
+	  	
+	    move1 = new DTPicture(null,true);
 	    move1.setTransferHandler(picHandler2);
 	    TablePanel.add(move1);
 	    
@@ -352,9 +346,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	    TablePanel.add(what5);
   }
   
-  
   //per azzerare le caselle bianche -- Patrizia
+  
   private void impostaCaselleVuote(){
+	  
 	  move1.setImage(null);
 	  move2.setImage(null);
 	  move3.setImage(null);
@@ -365,8 +360,9 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	  what3.setImage(null);
 	  what4.setImage(null);
 	  what5.setImage(null);
-	    
+	  
   }
+  
   //Returns an ImageIcon, or null if the path was invalid.
   
   protected static ImageIcon createImageIcon(String path, String description) {
@@ -389,7 +385,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 
 	//Ripristino i tentativi.
 	  
-	counter = 10;
+	counter = 5;
 	  
     //Crea il frame, toglie il LayoutManager e abilità il tasto X per chiudere la finestra.
 	//Dichiarato final perchè se no il listener rompe.
@@ -463,7 +459,7 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 		
 			//Se sono tutte piene, controlla che ci siano ancora tentativi disponibili.
 			
-			if ( counter != 0 ){
+			if ( counter > 0 ){
 		
 				//Se ancora va tutto bene, allora controlla che le tessere siano nell'ordine giusto.
 				//Se lo sono, comunica la vittoria e i tentativi necessari,
@@ -478,18 +474,32 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 					what2.image.getSource().equals(vetWhat[2].getSource()) &&
 					what3.image.getSource().equals(vetWhat[3].getSource()) &&
 					what4.image.getSource().equals(vetWhat[0].getSource()) &&
-					what5.image.getSource().equals(vetWhat[4].getSource()) )
-				{
-					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in "
-												 	 	 + (11 - counter) + " tentativ"
-												 	 	 + ( (11 - counter) == 1 ? 'o' : 'i' ) + '.' );
-					verifica.setEnabled(false);//aggiunto -- Patrizia
-					counter=10;//aggiunto. In caso di vittoria azzero il contatore -- Patrizia
+					what5.image.getSource().equals(vetWhat[4].getSource()) ){
+					
+					JOptionPane.showMessageDialog( null, "Hai vinto!!! Ce l'hai fatta in " +
+														 (6 - counter) + " tentativ" +
+														 ( (6 - counter) == 1 ? 'o' : 'i' ) + '.' );
+					
+					verifica.setEnabled(false);															//aggiunto -- Patrizia
+					counter=5;								   //aggiunto. In caso di vittoria azzero il contatore -- Patrizia
 				}
 				else
 				{
+					
 					counter--;
-					JOptionPane.showMessageDialog( null, "Sbagliato. Ti rimangono ancora " + counter + " tentativi: riprova!" );
+					if(counter==0){																	//aggiunto -- Patrizia
+						
+						JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+						verifica.setEnabled(false);													//aggiunto -- Patrizia
+					
+					}
+					else
+					{
+						
+					JOptionPane.showMessageDialog( null, "Sbagliato. Ti rimangono ancora " + counter +
+														 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!" );
+					
+					}
 				}
 
 			//Se non ci sono più tentativi a disposizione, comunica la sconfitta.
@@ -497,8 +507,10 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 			}
 			else
 			{
+				
 				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
-				verifica.setEnabled(false);//aggiunto -- Patrizia
+				verifica.setEnabled(false);													//aggiunto -- Patrizia
+			
 			}
 
 		//Se ci sono tessere vuote, chiede di ricontrollarle.
@@ -506,24 +518,32 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 		}
 		else
 		{	
-			counter--;//aggiunto --Patrizia
-			if(counter==0){//aggiunto -- Patrizia
-				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
-				verifica.setEnabled(false);//aggiunto -- Patrizia
-			}
-			else{
-				JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla! Ti rimangono ancora " + counter + " tentativi." );
+			
+			counter--;																		//aggiunto --Patrizia
+			if(counter==0){																	//aggiunto -- Patrizia
 				
+				JOptionPane.showMessageDialog( null, "Tentativi esauriti. Hai perso!" );
+				verifica.setEnabled(false);													//aggiunto -- Patrizia
+			
+			}
+			else
+			{
+				
+				JOptionPane.showMessageDialog( null, "Hai dimenticato delle tessere, ricontrolla! Ti rimangono ancora " + counter +
+													 " tentativ" + ( ( counter == 1 ) ? 'o' : 'i' ) + " : riprova!" );
+	
 			}
 			
 		}
 	}
 	
-	//gli if seguenti servono per gestire le voci del menu -- Patrizia
+	//Gli if seguenti servono per gestire le voci del menu. -- Patrizia
+	
 	if (e.getSource()==minewgame){
+		
 		System.out.println("Hai premuto \"Nuova partita\" ");
 		impostaCaselleVuote();
-		counter=10;
+		counter = 5;
 		verifica.setEnabled(true);
 		jpanelsUpdate();
 		
@@ -533,14 +553,14 @@ public class DragPictureDemo extends JPanel implements ActionListener{
 	}
 	if(e.getSource()==mihints){
 		JOptionPane.showMessageDialog( null, "Nelle caselle bianche dovete mettere le varie figure secondo queste regole:\n" +
-				 "_l'ordine cronologico va da sinistra verso destra;\n" +
-				 "_chi muove va nella fila sopra mentre chi è mosso va sotto di esso;\n" +
-				 "_la sequenza esatta rappresenta il ciclo di azioni che si deve fare per ottenere" +
-				 " la farina dal grano usando un mulino ad acqua." );
+				 							 "_l'ordine cronologico va da sinistra verso destra;\n" +
+				 							 "_chi muove va nella fila sopra mentre chi è mosso va sotto di esso;\n" +
+				 							 "_la sequenza esatta rappresenta il ciclo di azioni che si deve fare per ottenere" +
+				 							 " la farina dal grano usando un mulino ad acqua." );
 	}
 	if(e.getSource()==micredits){
 		JOptionPane.showMessageDialog( null, "Sviluppato da:\n\nprof. Martemucci Patrizia\nLuca Biavati\nValgimigli Filip\n\n" +
-				 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.");
+				 							 "\n\nCopyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.");
 	}
   }
 
