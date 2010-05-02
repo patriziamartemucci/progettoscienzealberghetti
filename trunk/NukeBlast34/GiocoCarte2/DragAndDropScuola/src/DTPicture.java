@@ -19,7 +19,12 @@ import javax.swing.TransferHandler;
 
 class DTPicture extends Picture implements MouseMotionListener {
   
-  private MouseEvent firstMouseEvent = null;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7388634082674699182L;
+
+private MouseEvent firstMouseEvent = null;
 
   private static boolean installInputMapBindings = true;
   
